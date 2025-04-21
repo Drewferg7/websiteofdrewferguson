@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Other</title>
+  <style>
+    /* Reset some basic styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #121212;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #f1f1f1;
+    }
+
+    /* Header styles */
+    .custom-header {
+      background-color: #1f1f1f;
+      padding: 1.5rem 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .custom-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      color: #dddddd;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #4db8ff;
+      transform: translateY(-2px);
+    }
+
+    /* Game Section Styles */
+    .game-container {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background-color: #1f1f1f;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    .game-container h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #4db8ff;
+    }
+
+    input[type="number"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 80px;
+      border-radius: 5px;
+      border: none;
+      text-align: center;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #4db8ff;
+      color: #121212;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    button:hover {
+      background-color: #3a9dd8;
+    }
+
+    .message {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="custom-header">
+    <div class="header-container">
+      <h1>OTHER</h1>
+         <nav>
+        <!-- Update the href to match the actual home page location -->
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="scratch.html" class="nav-link">| Scratch Page</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Game Section -->
+  <section class="game-container">
+    <h2>Guess the Number</h2>
+    <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
+    <input type="number" id="guessInput" min="1" max="100" />
+    <br>
+    <button onclick="checkGuess()">Guess</button>
+    <button onclick="resetGame()">Reset</button>
+    <p class="message" id="message"></p>
+  </section>
+
+  <!-- Game Script -->
+  <script>
+    let secretNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+      const input = document.getElementById('guessInput');
+      const message = document.getElementById('message');
+      const guess = parseInt(input.value);
+
+      if (isNaN(guess) || guess < 1 || guess > 100) {
+        message.textContent = 'Please enter a number between 1 and 100.';
+        message.style.color = 'orange';
+        return;
+      }
+
+      attempts++;
+
+      if (guess === secretNumber) {
+        message.textContent = `🎉 You got it in ${attempts} tries! The number was ${secretNumber}.`;
+        message.style.color = '#00ff88';
+      } else if (guess < secretNumber) {
+        message.textContent = 'Too low! Try again.';
+        message.style.color = '#ff5555';
+      } else {
+        message.textContent = 'Too high! Try again.';
+        message.style.color = '#ff5555';
+      }
+    }
+
+    function resetGame() {
+      secretNumber = Math.floor(Math.random() * 100) + 1;
+      attempts = 0;
+      document.getElementById('guessInput').value = '';
+      document.getElementById('message').textContent = '';
+    }
+  </script>
+</body>
+</html>
+
